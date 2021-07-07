@@ -1,0 +1,16 @@
+{
+  "name": "jira-caeser",
+  "version": "1.0.0",
+  "description": "JIRA Caeser",
+  "main": "index.js",
+  "author": "lopis",
+  "license": "MIT",
+  "dependencies": {
+    "@slack/web-api": "^6.2.4",
+    "dotenv": "^10.0.0"
+  },
+  "scripts": {
+    "env": "node -r dotenv/config",
+    "dev": "yarn env index.js"
+  }
+}
