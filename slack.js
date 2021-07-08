@@ -56,7 +56,8 @@ const sendMessage = async () => {
               emoji: true
             },
             style: 'primary',
-            value: 'upvote',
+            value: key,
+            action_id: 'upvote',
           },
           {
             type: 'button',
@@ -65,7 +66,8 @@ const sendMessage = async () => {
               text: 'ℹ️ Needs info',
               emoji: true
             },
-            value: 'info',
+            value: key,
+            action_id: 'info',
           },
           {
             type: 'button',
@@ -74,7 +76,8 @@ const sendMessage = async () => {
               text: '⚠️ Outdated',
               emoji: true
             },
-            value: 'outdated',
+            value: key,
+            action_id: 'outdated',
           },
           {
             type: 'button',
@@ -84,7 +87,8 @@ const sendMessage = async () => {
               emoji: true
             },
             style: 'danger',
-            value: 'close',
+            value: key,
+            action_id: 'close',
           }
         ],
       },

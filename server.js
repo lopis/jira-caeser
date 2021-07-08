@@ -16,10 +16,11 @@ const init = () => {
 
   app.post('/action', (req, res) => {
     const payload = JSON.parse(req.body.payload)
-    const action = payload.actions[0].value
+    const issueKey = payload.actions[0].value
+    const action = payload.actions[0].action_id
     console.log(action);
     if (action === 'upvote') {
-      voteForIssue()
+      voteForIssue(issueKey)
     }
   })
 
