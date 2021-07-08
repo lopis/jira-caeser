@@ -18,7 +18,7 @@ const messages = [
 ]
 
 const getIntro = () => {
-  return messages[Math.round(Math.random() * messages.length)]
+  return messages[Math.round(Math.random() * messages.length - 1)]
 }
 
 const sendMessage = async () => {
