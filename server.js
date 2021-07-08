@@ -1,5 +1,6 @@
 import express from 'express'
 import { sendMessage } from './slack.js'
+import { voteForIssue } from './jira.js'
 
 const port = process.env.PORT || 9000
 
@@ -17,9 +18,13 @@ const init = () => {
     const payload = JSON.parse(req.body.payload)
     const action = payload.actions[0].value
     console.log(action);
+    if (action === 'upvote') {
+      voteForIssue()
+    }
   })
 
-  app.post('/call', (req, res) => {
+  app.post('/call', (res) => {
+    res.send('OK.')
     sendMessage()
   })
 

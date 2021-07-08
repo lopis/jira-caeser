@@ -1,4 +1,5 @@
 import { WebClient } from '@slack/web-api';
+import { getRandomBacklogIssue } from './jira.js'
 
 // Read a token from the environment variables
 const token = process.env.SLACK_BOT_TOKEN;
@@ -7,7 +8,21 @@ const token = process.env.SLACK_BOT_TOKEN;
 const web = new WebClient(token);
 
 const conversationId = 'C0276BUNLAX'; //offsite-slack-bots channel
+const messages = [
+  'Let\'s take a look at this ticket:',
+  'Today I have for you:',
+  'I picked this ticket for you today:',
+  'How about this ticket?',
+  'Have a go with this one:',
+  'What about this one?'
+]
+
+const getIntro = () => {
+  messages[Math.round(Math.random() * messages.length)]
+}
+
 const sendMessage = async () => {
+  const { key } = getRandomBacklogIssue()
 
   // Post a message to the channel, and await the result.
   // Find more arguments and details of the response: https://api.slack.com/methods/chat.postMessage
@@ -19,7 +34,7 @@ const sendMessage = async () => {
         type: 'section',
         text: {
           type: 'mrkdwn',
-          text: 'Let\'s take a look at this ticket: :jira: <https://lopis-playground.atlassian.net/browse/GP-1|GP-1 - Fix Bugs>'
+          text: `${getIntro()} :jira: <https://lopis-playground.atlassian.net/browse/${key}|${key}>`
         },
       },
       {
