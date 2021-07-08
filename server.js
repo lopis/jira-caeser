@@ -25,7 +25,7 @@ const init = () => {
   })
 
   app.post('/call', (req, res) => {
-    res.send('OK.')
+    res.sendStatus(200);
     sendMessage()
   })
 
