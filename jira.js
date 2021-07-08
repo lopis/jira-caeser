@@ -2,7 +2,15 @@ import { AgileClient, Version3Client, Version3Models, Version3Parameters } from 
 
 const jiraHost = 'https://lopis-playground.atlassian.net'
 
-let client, agileClient
+/**
+ * @type Version3Client
+ */
+let client
+
+/**
+ * @type AgileClient
+ */
+let agileClient
 
 const config = {
   host: jiraHost,
@@ -29,7 +37,11 @@ export async function getRandomBacklogIssue() {
     const nextIssue = backlog.issues[Math.round(Math.random() * backlog.issues.length)];
     console.log(`Found ${backlog.issues.length} issues in the backlog. Next is ${nextIssue.key}`);
 
-    return nextIssue;
+    return {
+      id: nextIssue.id,
+      key: nextIssue.key,
+      title: nextIssue.fields?.summary
+    };
   } catch (error) {
     console.error(error);
   }

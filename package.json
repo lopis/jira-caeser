@@ -9,6 +9,7 @@
   "scripts": {
     "env": "node -r dotenv/config",
     "dev": "yarn env index.js",
+    "test": "yarn env test.js",
     "ac": "atlas-connect"
   },
   "dependencies": {
