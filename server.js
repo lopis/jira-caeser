@@ -7,10 +7,10 @@ const init = () => {
   // app.use(express.json())
   app.use(express.urlencoded({ extended: true }));
 
-  // app.get('/', (req, res) => {
-  //   res.send('Hello World!')
-  //   console.log(req.body);
-  // })
+  app.get('/', (req, res) => {
+    res.send('Hello! This is Caeser for JIRA.')
+    console.log(req.body);
+  })
 
   app.post('/', (req, res) => {
     res.send('Gotcha!')
