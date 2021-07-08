@@ -23,7 +23,7 @@ const init = () => {
     }
   })
 
-  app.post('/call', (res) => {
+  app.post('/call', (req, res) => {
     res.send('OK.')
     sendMessage()
   })
