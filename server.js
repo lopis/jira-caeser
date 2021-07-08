@@ -25,7 +25,7 @@ const init = () => {
   })
 
   app.post('/call', (req, res) => {
-    res.sendStatus(200);
+    res.send('🌿 Calling JIRA Caeser 🌿')
     sendMessage()
   })
 
