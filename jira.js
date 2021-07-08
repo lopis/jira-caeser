@@ -27,7 +27,7 @@ export async function getRandomBacklogIssue() {
     const boards = await agileClient.board.getAllBoards();
     const backlog = await agileClient.board.getIssuesForBacklog({ boardId: boards.values[0].id })
     const nextIssue = backlog.issues[Math.round(Math.random() * backlog.issues.length)];
-    console.log(`Found ${backlog.issues.length} issues in the backlog.`);
+    console.log(`Found ${backlog.issues.length} issues in the backlog. Next is ${nextIssue.key}`);
 
     return nextIssue;
   } catch (error) {

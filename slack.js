@@ -22,7 +22,7 @@ const getIntro = () => {
 }
 
 const sendMessage = async () => {
-  const { key } = getRandomBacklogIssue()
+  const { key } = await getRandomBacklogIssue()
 
   // Post a message to the channel, and await the result.
   // Find more arguments and details of the response: https://api.slack.com/methods/chat.postMessage
