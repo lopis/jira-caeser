@@ -7,7 +7,7 @@ const token = process.env.SLACK_BOT_TOKEN;
 const web = new WebClient(token);
 
 const conversationId = 'C0276BUNLAX'; //offsite-slack-bots channel
-const test = async () => {
+const sendMessage = async () => {
 
   // Post a message to the channel, and await the result.
   // Find more arguments and details of the response: https://api.slack.com/methods/chat.postMessage

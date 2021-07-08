@@ -1,4 +1,5 @@
 import express from 'express'
+import { sendMessage } from './slack.js'
 
 const port = process.env.PORT || 9000
 
@@ -12,11 +13,14 @@ const init = () => {
     console.log(req.body);
   })
 
-  app.post('/', (req, res) => {
-    res.send('Gotcha!')
+  app.post('/action', (req, res) => {
     const payload = JSON.parse(req.body.payload)
     const action = payload.actions[0].value
     console.log(action);
+  })
+
+  app.post('/call', (req, res) => {
+    sendMessage()
   })
 
   app.listen(port, () => {
