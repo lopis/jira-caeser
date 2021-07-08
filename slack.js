@@ -81,5 +81,5 @@ const sendMessage = async () => {
 }
 
 export {
-  test,
+  sendMessage,
 }
