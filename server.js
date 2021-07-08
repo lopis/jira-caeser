@@ -22,6 +22,7 @@ const init = () => {
     if (action === 'upvote') {
       voteForIssue(issueKey)
     }
+    res.sendStatus(200)
   })
 
   app.post('/call', (req, res) => {
