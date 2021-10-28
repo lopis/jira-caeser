@@ -57,6 +57,5 @@ const sendRefinementMessagesMessage = async (payload) => {
 }
 
 export {
-  sendBacklogMessage,
   sendRefinementMessagesMessage,
 }
