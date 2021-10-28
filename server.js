@@ -14,7 +14,7 @@ const init = () => {
     console.log(req.body);
   })
 
-  app.post('/refine', (req, res) => {
+  app.post('/refine', async (req, res) => {
     res.send('Received batch of messages...')
 
     const messages = await getUnestimatedIssues()
