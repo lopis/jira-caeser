@@ -52,7 +52,7 @@ const sendRefinementMessagesMessage = async (payload) => {
   };
 
   text.split('\n').forEach(line => {
-    await send(line)
+    send(line)
   });
 }
 
