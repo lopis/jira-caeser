@@ -63,8 +63,8 @@ const sendRefinementMessage = async (line) => {
  *  api_app_id=A123456
  */
 const sendRefinementMessages = async (messages, body) => {
-
   const { channel_id } = body;
+  console.log('typeof messages', typeof messages);
   web.chat.postMessage({
     channel: channel_id,
     text: '🌿 Starting refinement 🌿'
