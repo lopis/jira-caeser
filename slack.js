@@ -21,9 +21,9 @@ const getIntro = () => {
   return messages[Math.round(Math.random() * messages.length - 1)]
 }
 
-const sendRefinementMessage = async (line) => {
+const sendRefinementMessage = async (line, channel) => {
   const response = await web.chat.postMessage({
-    channel: channel_id,
+    channel,
     blocks: [
       {
         type: 'section',
@@ -66,7 +66,7 @@ const sendRefinementMessages = async (messages, body) => {
     channel: channel_id,
     text: '🌿 Starting refinement 🌿'
   }).then(() => {
-    messages.forEach(sendRefinementMessage);
+    messages.forEach((message) => sendRefinementMessage(message, channel_id));
   })
 }
 
