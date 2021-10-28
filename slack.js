@@ -70,7 +70,7 @@ const sendRefinementMessages = async (messages, body) => {
   }).then(() => {
     messages.slice(0, 5).forEach((message) => sendRefinementMessage(message, channel_id));
     if (messages.length > 5) {
-      await web.chat.postMessage({
+      web.chat.postMessage({
         channel: channel_id,
         text: `${messages.length - 5} more tasks were hidden`,
       })
