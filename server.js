@@ -15,8 +15,6 @@ const init = () => {
   })
 
   app.post('/refine', async (req, res) => {
-    res.send('Received batch of messages...')
-
     const messages = await getUnestimatedIssues()
     sendRefinementMessages(messages, req.body)
   });

@@ -34,7 +34,7 @@ const sendRefinementMessage = async (line, channel) => {
       },
     ]
   });
-  ['u1', 'u2', 'u3', 'u5'].forEach(async (emoji) => {
+  ['fib_1', 'fib_2', 'fib_3', 'fib_5'].forEach(async (emoji) => {
     await web.reactions.add({
       name: emoji,
       channel,
