@@ -49,15 +49,12 @@ const sendRefinementMessagesMessage = async (payload) => {
       channel: channel_id,
       text: line,
     });
-    await web.reactions.add({
-      name: ':one:',
-      channel: channel_id,
-      timestamp: response.ts,
-    });
-    await web.reactions.add({
-      name: ':two:',
-      channel: channel_id,
-      timestamp: response.ts,
+    ['one', 'two', 'three', 'five'].forEach(async (emoji) => {
+      await web.reactions.add({
+        name: emoji,
+        channel: channel_id,
+        timestamp: response.ts,
+      });
     });
   };
 
