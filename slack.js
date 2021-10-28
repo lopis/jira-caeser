@@ -60,7 +60,7 @@ const sendRefinementMessagesMessage = async (payload) => {
           },
         ]
       });
-      ['one', 'two', 'three', 'five'].forEach(async (emoji) => {
+      ['u1', 'u2', 'u3', 'u5'].forEach(async (emoji) => {
         await web.reactions.add({
           name: emoji,
           channel: channel_id,
