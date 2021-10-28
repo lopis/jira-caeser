@@ -36,13 +36,13 @@ const sendRefinementMessage = async (line, channel) => {
       },
     ]
   });
-  ['fib_1', 'fib_2', 'fib_3', 'fib_5'].forEach(async (emoji) => {
-    await web.reactions.add({
-      name: emoji,
-      channel,
-      timestamp: response.ts,
-    });
-  });
+  // ['fib_1', 'fib_2', 'fib_3', 'fib_5'].forEach(async (emoji) => {
+  //   await web.reactions.add({
+  //     name: emoji,
+  //     channel,
+  //     timestamp: response.ts,
+  //   });
+  // });
 };
 
 /**
@@ -67,18 +67,19 @@ const sendRefinementMessages = async (messages, body) => {
   const { channel_id } = body;
   web.chat.postMessage({
     channel: channel_id,
-    text: '🌿 Starting refinement 🌿'
-  }).then(() => {
-    messages.slice(0, MAX_TASKS).forEach((message) => sendRefinementMessage(message, channel_id));
-    if (messages.length > MAX_TASKS) {
-      setTimeout(() => {
-        web.chat.postMessage({
-          channel: channel_id,
-          text: `${messages.length - MAX_TASKS} more tasks were hidden (max 10)`,
-        })
-      }, 200);
-    }
+    text: '🌿 Starting refinement :fib_1: :fib_2: :fib_3: :fib_5: 🌿'
   })
+    .then(() => {
+      messages.slice(0, MAX_TASKS).forEach((message) => sendRefinementMessage(message, channel_id));
+      if (messages.length > MAX_TASKS) {
+        setTimeout(() => {
+          web.chat.postMessage({
+            channel: channel_id,
+            text: `${messages.length - MAX_TASKS} more tasks were hidden (max 10)`,
+          })
+        }, 200);
+      }
+    })
 }
 
 export {
