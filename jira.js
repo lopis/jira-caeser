@@ -57,10 +57,7 @@ export async function getUnestimatedIssues() {
     const messages = results.issues.map(({ key, fields }) => {
       return `<${jiraHost}/browse/${key}|${key}> - ${fields.summary} (${fields.status.name})`
     })
-    console.log(messages);
-
     return messages
-
   } catch (error) {
     console.error(error);
   }
