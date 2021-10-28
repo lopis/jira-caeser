@@ -25,6 +25,7 @@ const sendRefinementMessage = async (line, channel) => {
   const response = await web.chat.postMessage({
     channel,
     text: line,
+    icon_emoji: '8ball',
     blocks: [
       {
         type: 'section',
@@ -67,7 +68,13 @@ const sendRefinementMessages = async (messages, body) => {
     channel: channel_id,
     text: '🌿 Starting refinement 🌿'
   }).then(() => {
-    messages.forEach((message) => sendRefinementMessage(message, channel_id));
+    messages.slice(0, 5).forEach((message) => sendRefinementMessage(message, channel_id));
+    if (messages.length > 5) {
+      await web.chat.postMessage({
+        channel: channel_id,
+        text: `${messages.length - 5} more tasks were hidden`,
+      })
+    }
   })
 }
 
