@@ -45,7 +45,7 @@ const sendRefinementMessagesMessage = async (payload) => {
   const send = async (line) => {
     // Post a message to the channel, and await the result.
     // Find more arguments and details of the response: https://api.slack.com/methods/chat.postMessage
-    const [url, summary] = line.split(',')
+    const [url, summary] = line.split('---')
 
     if (url && summary) {
       const response = await web.chat.postMessage({
