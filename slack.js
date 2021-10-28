@@ -22,27 +22,25 @@ const getIntro = () => {
 }
 
 const sendRefinementMessage = async (line) => {
-  if (url && summary) {
-    const response = await web.chat.postMessage({
-      channel: channel_id,
-      blocks: [
-        {
-          type: 'section',
-          text: {
-            type: 'mrkdwn',
-            text: line
-          },
+  const response = await web.chat.postMessage({
+    channel: channel_id,
+    blocks: [
+      {
+        type: 'section',
+        text: {
+          type: 'mrkdwn',
+          text: line
         },
-      ]
+      },
+    ]
+  });
+  ['u1', 'u2', 'u3', 'u5'].forEach(async (emoji) => {
+    await web.reactions.add({
+      name: emoji,
+      channel: channel_id,
+      timestamp: response.ts,
     });
-    ['u1', 'u2', 'u3', 'u5'].forEach(async (emoji) => {
-      await web.reactions.add({
-        name: emoji,
-        channel: channel_id,
-        timestamp: response.ts,
-      });
-    });
-  }
+  });
 };
 
 /**
