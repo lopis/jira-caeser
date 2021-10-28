@@ -15,6 +15,8 @@ const init = () => {
   })
 
   app.post('/refine', async (req, res) => {
+    res.sendStatus(200)
+
     const messages = await getUnestimatedIssues()
     sendRefinementMessages(messages, req.body)
   });

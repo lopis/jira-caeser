@@ -24,6 +24,7 @@ const getIntro = () => {
 const sendRefinementMessage = async (line, channel) => {
   const response = await web.chat.postMessage({
     channel,
+    text: line,
     blocks: [
       {
         type: 'section',
