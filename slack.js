@@ -73,7 +73,7 @@ const sendRefinementMessages = async (messages, body) => {
       setTimeout(() => {
         web.chat.postMessage({
           channel: channel_id,
-          text: `:information_source: ${messages.length - 5} more tasks were hidden`,
+          text: `${messages.length - 5} more tasks were hidden`,
         })
       }, 200);
     }

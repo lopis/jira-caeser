@@ -15,7 +15,7 @@ const init = () => {
   })
 
   app.post('/refine', async (req, res) => {
-    res.sendStatus(200)
+    res.send('Gotcha. Pulling issues from JIRA...')
 
     const messages = await getUnestimatedIssues()
     sendRefinementMessages(messages, req.body)
