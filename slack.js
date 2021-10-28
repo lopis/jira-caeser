@@ -21,7 +21,7 @@ const getIntro = () => {
   return messages[Math.round(Math.random() * messages.length - 1)]
 }
 
-const sendMessage = async () => {
+const sendBacklogMessage = async () => {
   const { key } = await getRandomBacklogIssue()
 
   // Post a message to the channel, and await the result.
@@ -99,6 +99,36 @@ const sendMessage = async () => {
   console.log(`Successfully send message ${result.ts} in conversation ${conversationId}`);
 }
 
+/**
+ * Payload example:
+ *  token=gIkuvaNzQIHg97ATvDxqgjtO
+ *  team_id=T0001
+ *  team_domain=example
+ *  enterprise_id=E0001
+ *  enterprise_name=Globular%20Construct%20Inc
+ *  channel_id=C2147483705
+ *  channel_name=test
+ *  user_id=U2147483697
+ *  user_name=Steve
+ *  command=/weather
+ *  text=94070
+ *  response_url=https://hooks.slack.com/commands/1234/5678
+ *  trigger_id=13345224609.738474920.8088930838d88f008e0
+ *  api_app_id=A123456
+ */
+const sendRefinementMessagesMessage = async (payload) => {
+
+  const { text } = payload
+
+  // Post a message to the channel, and await the result.
+  // Find more arguments and details of the response: https://api.slack.com/methods/chat.postMessage
+  const result = await web.chat.postMessage({
+    channel: conversationId,
+    text: text,
+  });
+}
+
 export {
-  sendMessage,
+  sendBacklogMessage,
+  sendRefinementMessagesMessage,
 }
