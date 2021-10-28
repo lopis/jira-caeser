@@ -45,25 +45,29 @@ const sendRefinementMessagesMessage = async (payload) => {
   const send = async (line) => {
     // Post a message to the channel, and await the result.
     // Find more arguments and details of the response: https://api.slack.com/methods/chat.postMessage
-    const response = await web.chat.postMessage({
-      channel: channel_id,
-      blocks: [
-        {
-          type: 'section',
-          text: {
-            type: 'mrkdwn',
-            text: line
-          },
-        },
-      ]
-    });
-    ['one', 'two', 'three', 'five'].forEach(async (emoji) => {
-      await web.reactions.add({
-        name: emoji,
+    const [url, summary] = line.split(',')
+
+    if (url && summary) {
+      const response = await web.chat.postMessage({
         channel: channel_id,
-        timestamp: response.ts,
+        blocks: [
+          {
+            type: 'section',
+            text: {
+              type: 'mrkdwn',
+              text: `<${url}|${summary}>`
+            },
+          },
+        ]
       });
-    });
+      ['one', 'two', 'three', 'five'].forEach(async (emoji) => {
+        await web.reactions.add({
+          name: emoji,
+          channel: channel_id,
+          timestamp: response.ts,
+        });
+      });
+    }
   };
 
   text.split('\n').forEach(line => {
