@@ -63,17 +63,18 @@ const sendRefinementMessage = async (line, channel) => {
  *  api_app_id=A123456
  */
 const sendRefinementMessages = async (messages, body) => {
+  const MAX_TASKS = 10
   const { channel_id } = body;
   web.chat.postMessage({
     channel: channel_id,
     text: '🌿 Starting refinement 🌿'
   }).then(() => {
-    messages.slice(0, 5).forEach((message) => sendRefinementMessage(message, channel_id));
-    if (messages.length > 5) {
+    messages.slice(0, MAX_TASKS).forEach((message) => sendRefinementMessage(message, channel_id));
+    if (messages.length > MAX_TASKS) {
       setTimeout(() => {
         web.chat.postMessage({
           channel: channel_id,
-          text: `${messages.length - 5} more tasks were hidden`,
+          text: `${messages.length - MAX_TASKS} more tasks were hidden (max 10)`,
         })
       }, 200);
     }

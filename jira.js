@@ -51,7 +51,7 @@ export async function getUnestimatedIssues() {
   try {
     const boards = await agileClient.board.getAllBoards();
     const results = await client.issueSearch.searchForIssuesUsingJql({
-      jql: 'project = SEAII AND "Story point estimate" = EMPTY AND Sprint != EMPTY AND Sprint != 108 AND Sprint != 134 AND statusCategory != Done AND type = Task AND (labels != spike OR labels = EMPTY) ORDER BY created DESC'
+      jql: 'project = SEAII AND "Story point estimate" = EMPTY AND Sprint != EMPTY AND Sprint != 108 AND Sprint != 134 AND statusCategory != Done AND type = Task AND (labels != spike OR labels = EMPTY) ORDER BY status ASC'
     })
     console.log(`Found ${results.total} issues in the filter.`);
     const messages = results.issues.map(({ key, fields }) => {
