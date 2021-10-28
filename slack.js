@@ -45,9 +45,19 @@ const sendRefinementMessagesMessage = async (payload) => {
   const send = async (line) => {
     // Post a message to the channel, and await the result.
     // Find more arguments and details of the response: https://api.slack.com/methods/chat.postMessage
-    await web.chat.postMessage({
+    const response = await web.chat.postMessage({
       channel: channel_id,
       text: line,
+    });
+    await web.reactions.add({
+      name: ':one:',
+      channel: channel_id,
+      timestamp: response.ts,
+    });
+    await web.reactions.add({
+      name: ':two:',
+      channel: channel_id,
+      timestamp: response.ts,
     });
   };
 
