@@ -17,7 +17,7 @@ const init = () => {
   app.post('/refine', (req, res) => {
     res.send('Received batch of messages...')
 
-    messages = getUnestimatedIssues()
+    const messages = getUnestimatedIssues()
     sendRefinementMessages(messages, req.body)
   });
 
