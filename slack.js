@@ -21,6 +21,30 @@ const getIntro = () => {
   return messages[Math.round(Math.random() * messages.length - 1)]
 }
 
+const sendRefinementMessage = async (line) => {
+  if (url && summary) {
+    const response = await web.chat.postMessage({
+      channel: channel_id,
+      blocks: [
+        {
+          type: 'section',
+          text: {
+            type: 'mrkdwn',
+            text: line
+          },
+        },
+      ]
+    });
+    ['u1', 'u2', 'u3', 'u5'].forEach(async (emoji) => {
+      await web.reactions.add({
+        name: emoji,
+        channel: channel_id,
+        timestamp: response.ts,
+      });
+    });
+  }
+};
+
 /**
  * Payload example:
  *  token=gIkuvaNzQIHg97ATvDxqgjtO
@@ -38,43 +62,17 @@ const getIntro = () => {
  *  trigger_id=13345224609.738474920.8088930838d88f008e0
  *  api_app_id=A123456
  */
-const sendRefinementMessagesMessage = async (payload) => {
+const sendRefinementMessages = async (messages, body) => {
 
-  const { text, channel_id } = payload;
-
-  const send = async (line) => {
-    // Post a message to the channel, and await the result.
-    // Find more arguments and details of the response: https://api.slack.com/methods/chat.postMessage
-    const [url, summary] = line.split('---')
-
-    if (url && summary) {
-      const response = await web.chat.postMessage({
-        channel: channel_id,
-        blocks: [
-          {
-            type: 'section',
-            text: {
-              type: 'mrkdwn',
-              text: `<${url}|${summary}>`
-            },
-          },
-        ]
-      });
-      ['u1', 'u2', 'u3', 'u5'].forEach(async (emoji) => {
-        await web.reactions.add({
-          name: emoji,
-          channel: channel_id,
-          timestamp: response.ts,
-        });
-      });
-    }
-  };
-
-  text.split('\n').forEach(line => {
-    send(line)
-  });
+  const { channel_id } = body;
+  web.chat.postMessage({
+    channel: channel_id,
+    text: '🌿 Starting refinement 🌿'
+  }).then(() => {
+    messages.split('\n').forEach(sendRefinementMessage);
+  })
 }
 
 export {
-  sendRefinementMessagesMessage,
+  sendRefinementMessages,
 }

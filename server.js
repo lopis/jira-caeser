@@ -1,6 +1,6 @@
 import express from 'express'
-import { sendRefinementMessagesMessage } from './slack.js'
-// import { voteForIssue } from './jira.js'
+import { sendRefinementMessages } from './slack.js'
+import { getUnestimatedIssues } from './jira.js'
 
 const port = process.env.PORT || 9000
 
@@ -15,10 +15,11 @@ const init = () => {
   })
 
   app.post('/refine', (req, res) => {
-    res.send('🌿 Starting refinement 🌿')
+    res.send('Received batch of messages...')
 
-    sendRefinementMessagesMessage(req.body)
-  })
+    messages = getUnestimatedIssues()
+    sendRefinementMessages(messages, req.body)
+  });
 
   app.listen(port, () => {
     console.log(`Listening on port ${port}`)

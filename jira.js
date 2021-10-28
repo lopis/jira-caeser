@@ -1,6 +1,6 @@
 import { AgileClient, Version3Client, Version3Models, Version3Parameters } from 'jira.js'
 
-const jiraHost = 'https://lopis-playground.atlassian.net'
+const jiraHost = 'https://ecosia.atlassian.net'
 
 /**
  * @type Version3Client
@@ -42,6 +42,25 @@ export async function getRandomBacklogIssue() {
       key: nextIssue.key,
       title: nextIssue.fields?.summary
     };
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function getUnestimatedIssues() {
+  try {
+    const boards = await agileClient.board.getAllBoards();
+    const results = await client.issueSearch.searchForIssuesUsingJql({
+      jql: 'project = SEAII AND "Story point estimate" = EMPTY AND Sprint != EMPTY AND Sprint != 108 AND Sprint != 134 AND statusCategory != Done AND type = Task AND (labels != spike OR labels = EMPTY) ORDER BY created DESC'
+    })
+    console.log(`Found ${results.total} issues in the filter.`);
+    const messages = results.issues.map(({ key, fields }) => {
+      return `<${jiraHost}/browse/${key}|${key}> - ${fields.summary} (${fields.status.name})`
+    })
+    console.log(messages);
+
+    return messages
+
   } catch (error) {
     console.error(error);
   }
