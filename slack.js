@@ -40,13 +40,13 @@ const getIntro = () => {
  */
 const sendRefinementMessagesMessage = async (payload) => {
 
-  const { text } = payload;
+  const { text, channel_id } = payload;
 
   const send = async (line) => {
     // Post a message to the channel, and await the result.
     // Find more arguments and details of the response: https://api.slack.com/methods/chat.postMessage
     await web.chat.postMessage({
-      channel: conversationId,
+      channel: channel_id,
       text: line,
     });
   };
