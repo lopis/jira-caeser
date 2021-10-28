@@ -69,7 +69,7 @@ const sendRefinementMessages = async (messages, body) => {
     channel: channel_id,
     text: '🌿 Starting refinement 🌿'
   }).then(() => {
-    messages.split('\n').forEach(sendRefinementMessage);
+    messages.forEach(sendRefinementMessage);
   })
 }
 
