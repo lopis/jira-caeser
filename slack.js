@@ -63,6 +63,14 @@ const sendRefinementMessage = async (line, channel) => {
  *  api_app_id=A123456
  */
 const sendRefinementMessages = async (messages, body) => {
+  if (!messages) {
+    web.chat.postMessage({
+      channel: channel_id,
+      text: '✨ There are no tickets in need of refinement at the moment. ✨'
+    })
+    return
+  }
+
   const MAX_TASKS = 10
   const { channel_id } = body;
   web.chat.postMessage({

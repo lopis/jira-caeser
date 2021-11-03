@@ -54,6 +54,9 @@ export async function getUnestimatedIssues() {
       jql: 'project = SEAII AND "Story point estimate" = EMPTY AND Sprint != EMPTY AND Sprint != 108 AND Sprint != 134 AND statusCategory != Done AND type = Task AND (labels != spike OR labels = EMPTY) ORDER BY status ASC'
     })
     console.log(`Found ${results.total} issues in the filter.`);
+    if (results.total < 1) {
+      return
+    }
     const messages = results.issues.map(({ key, fields }) => {
       return `<${jiraHost}/browse/${key}|${key}> - ${fields.summary} (${fields.status.name})`
     })
