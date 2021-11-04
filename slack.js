@@ -63,6 +63,9 @@ const sendRefinementMessage = async (line, channel) => {
  *  api_app_id=A123456
  */
 const sendRefinementMessages = async (messages, body) => {
+  const MAX_TASKS = 10
+  const { channel_id } = body;
+
   if (!messages) {
     web.chat.postMessage({
       channel: channel_id,
@@ -71,8 +74,6 @@ const sendRefinementMessages = async (messages, body) => {
     return
   }
 
-  const MAX_TASKS = 10
-  const { channel_id } = body;
   web.chat.postMessage({
     channel: channel_id,
     text: '🌿 Starting refinement :fib_1: :fib_2: :fib_3: :fib_5: 🌿'
