@@ -7,7 +7,7 @@ const token = process.env.SLACK_BOT_TOKEN;
 // Initialize
 const web = new WebClient(token);
 
-const conversationId = 'C0276BUNLAX'; //offsite-slack-bots channel
+const conversationId = 'C05JHHYK5T3'; // #rich-content-refinement
 const messages = [
   'Let\'s take a look at this ticket:',
   'Today I have for you:',
